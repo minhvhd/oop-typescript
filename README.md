@@ -36,8 +36,7 @@ This repository is a complete guide and tutorial for the principles and techniqu
         * [Bridge](#bridge)
         * [Flyweight (Cache)](#flyweight-cache)
 
-
-
+   
 ## Fundamentals
 ### What's Object-oriented-programming?
 
@@ -47,6 +46,75 @@ Object-oriented programming (OOP) is a programming paradigm based on the concept
 2. <strong>Encapsulation</strong>
 3. <strong>Inheritance</strong>
 4. <strong>Polymorphism</strong>
+   
+   <div style="display: flex; gap: 50px; padding: 50px 0; width: 100%">
+      <img width="25%" src="https://images.twinkl.co.uk/tw1n/image/private/t_630/u/ux/chafinch-flying-flight-bird-animal-ks1_ver_1.png"/>
+      <img width="50%" src="https://www.animalhumanesociety.org/sites/default/files/styles/scale_width_960/public/media/image/2022-11/paint-your-pet-graphic.png.jpg?itok=pO-esA4L"/>
+   </div>
+
+```typescript
+interface CanMove {
+   move: () => void
+}
+
+class Animal {
+   protected name: string;
+   protected age: number;
+
+   constructor(name: string, age: number) {
+      this.name = name;
+      this.age = age;
+   }
+}
+
+class Bird extends Animal implements CanMove {
+   constructor(name: string, age: number) {
+      super(name, age);
+   }
+
+   move(): void {
+      console.log('I can fly at 50km/h');
+   }
+}
+
+class Dog extends Animal implements CanMove {
+   protected furColor: string;
+
+   constructor(name: string, age: number, furColor: string) {
+      super(name, age);
+      this.furColor = furColor;
+   }
+
+   move(): void {
+      console.log('I can run at 30km/h');
+   }
+
+   get fullName(): string {
+      return `My name is ${this.name}`;
+   }
+}
+
+class Golden extends Dog {
+   constructor(name: string, age: number) {
+      super(name, age, 'yellow');
+   }
+
+   override move() {
+      console.log('I can run at 15km/h');
+   }
+}
+
+const normalBird = new Bird('Min', 18);
+normalBird.move(); //I can fly at 50km/h
+
+const normalDog = new Dog('Min', 24, 'white');
+console.log(normalDog.fullName); //My name is Min
+normalDog.move(); //I can run at 30km/h
+
+const golden = new Golden('Golden', 24);
+console.log(golden.fullName); //My name is Golden
+golden.move(); //I can run at 15km/h
+```
 
 [`⬆ BACK TO TOP ⬆`](#table-of-contents)
 
